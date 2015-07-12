@@ -1,0 +1,13 @@
+﻿@using My_Site.Models;
+@model Cart
+
+    <b>В вашей корзине</b>    
+    @if (Model.Positions.Count() == 0)
+    { 
+        <p>Пусто</p> 
+    }  else 
+    {
+        <p>@Model.Positions.Sum(x => x.Quantity) деталей
+        @Model.TotalPrice().ToString("# руб")</p>
+    }
+

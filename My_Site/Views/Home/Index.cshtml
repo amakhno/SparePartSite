@@ -1,0 +1,20 @@
+﻿@model My_Site.Models.Cart
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<script type="text/javascript"
+        src="@Url.Content("~/scripts/My_scripts.js")">
+</script>
+
+<p>
+    <h3>Приветствую вас на главной странице</h3>
+</p>
+<p>Контроллер: <b>Home</b></p>
+<p>Действие: <b>Index</b></p>
+@Html.ActionLink("Кнопка", "Index", "Cart", new { id = "myButton" })
+
+

@@ -1,0 +1,15 @@
+﻿@using My_Site.Models;
+@model SparePartListViewModel
+
+@{
+    ViewBag.Title = "Товары";
+}
+<p>
+@foreach (var p in @Model.SpareParts)
+{
+    @Html.Partial("_SparePartWithDesc", p)
+}
+</p>
+<div>
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x, category = Model.CurrentCategory }))
+</div>

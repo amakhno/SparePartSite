@@ -1,0 +1,51 @@
+﻿@model My_Site.Models.CartIndexViewModel
+
+@{
+    ViewBag.Title = "Корзина";
+}
+
+<h2>Ваша корзина</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Кол-во</th>
+            <th>Деталь</th>
+            <th class="text-right">Цена</th>
+            <th class="text-right">Стоимость</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var line in Model.Cart.Positions)
+        {
+            <tr>
+                <td class="text-center">@line.Quantity</td>
+                <td class="text-left">@line.SparePart.MarkWithModel</td>
+                <td class="text-right">@line.SparePart.Price.ToString("# руб")</td>
+                <td class="text-right">
+                    @((line.Quantity * line.SparePart.Price).ToString("# руб"))
+                </td>
+                <td>
+                    @using (Html.BeginForm("RemoveFromCart", "Cart"))
+                    {
+                        @Html.Hidden("spareId", line.SparePart.Id)
+                        @Html.HiddenFor(x => x.ReturnUrl)
+                        <input class="btn btn-sm btn-danger" type="submit" value="Удалить" />
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-right">Итого:</td>
+            <td class="text-right">
+                @Model.Cart.TotalPrice().ToString("# руб")
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+<div class="text-center">
+    <a class="btn btn-primary" href="@Model.ReturnUrl">Продолжить покупки</a>
+    @Html.ActionLink("Оформить заказ", "Checkout", new { retuntUrl = Request.Url.PathAndQuery }, new { @class = "btn btn-primary" })
+</div>
