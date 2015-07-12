@@ -7,12 +7,12 @@ using My_Site.Models;
 
 namespace My_Site.Controllers
 {
-    public class SparePartController : Controller
+    public partial class SparePartController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
         private int pageSize = 4;
 
-        public ActionResult List(string category = "Двигатель", int page = 1)
+        public virtual ActionResult List(string category = "Двигатель", int page = 1)
         {
             SparePartListViewModel model = new SparePartListViewModel
             {
@@ -34,7 +34,7 @@ namespace My_Site.Controllers
             return View(model);
         }
 
-        public ActionResult Show(int spareid, string returnUrl)
+        public virtual ActionResult Show(int spareid, string returnUrl)
         {
             SparePart sparepart = db.SpareParts.Where(x => x.Id == spareid).FirstOrDefault();
             return View(sparepart);

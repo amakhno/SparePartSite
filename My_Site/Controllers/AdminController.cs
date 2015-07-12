@@ -9,14 +9,14 @@ using My_Site.Models;
 namespace My_Site.App_Start
 {
     [Authorize]
-    public class AdminController : Controller
+    public partial class AdminController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
         //
         // GET: /Admin/
         [HttpGet]
         [AllowAnonymous]
-        public PartialViewResult Check()
+        public virtual PartialViewResult Check()
         {
             bool isAdmin = false;
             if (User.Identity.IsAuthenticated)
@@ -27,18 +27,18 @@ namespace My_Site.App_Start
         }
 
         [HttpGet]
-        public ViewResult Index()
+        public virtual ViewResult Index()
         {
             return View(db.SpareParts);
         }
 
-        public ViewResult Edit(int spareId)
+        public virtual ViewResult Edit(int spareId)
         {
             return View(db.SpareParts.Where(x => x.Id == spareId).First());
         }
 
         [HttpPost]
-        public ViewResult Edit(SparePart model)
+        public virtual ViewResult Edit(SparePart model)
         {
             if (ModelState.IsValid)
             {
