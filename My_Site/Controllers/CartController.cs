@@ -8,12 +8,12 @@ using My_Site.Models;
 namespace My_Site.Controllers
 {
     [Authorize]
-    public class CartController : Controller
+    public partial class CartController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
 
         [AllowAnonymous]
-        public ViewResult Index(Cart cart, string returnUrl = null)
+        public virtual ViewResult Index(Cart cart, string returnUrl = null)
         {
             return View(new CartIndexViewModel
             {
@@ -23,7 +23,7 @@ namespace My_Site.Controllers
         }
 
         [AllowAnonymous]
-        public RedirectToRouteResult AddToCart(Cart cart, int spareId, string returnUrl)
+        public virtual RedirectToRouteResult AddToCart(Cart cart, int spareId, string returnUrl)
         {
             SparePart sparepart = db.SpareParts
                 .FirstOrDefault(e => e.Id == spareId);
@@ -36,7 +36,7 @@ namespace My_Site.Controllers
         }
 
         [AllowAnonymous]
-        public RedirectToRouteResult RemoveFromCart(Cart cart, int spareId, string returnUrl)
+        public virtual RedirectToRouteResult RemoveFromCart(Cart cart, int spareId, string returnUrl)
         {
             SparePart sparepart = db.SpareParts
                 .FirstOrDefault(g => g.Id == spareId);
@@ -49,13 +49,13 @@ namespace My_Site.Controllers
         }
 
         [AllowAnonymous]
-        public PartialViewResult SummaryInformation(Cart cart)
+        public virtual PartialViewResult SummaryInformation(Cart cart)
         {
             return PartialView(cart);
         }
-        
 
-        public ActionResult Checkout(string returnUrl)
+
+        public virtual ActionResult Checkout(string returnUrl)
         {
             return View();
         }
