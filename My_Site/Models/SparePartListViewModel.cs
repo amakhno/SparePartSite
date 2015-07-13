@@ -10,5 +10,6 @@ namespace My_Site.Models
         public IEnumerable<SparePart> SpareParts { get; set; }
         public PagingInfo PagingInfo { get; set; }
         public string CurrentCategory { get; set; }
+        public string Search { get; set; }
     }
 }

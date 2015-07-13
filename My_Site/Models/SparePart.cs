@@ -21,11 +21,9 @@ namespace My_Site.Models
         [Display(Name = "Категория")]
         public string Category { get; set; }
 
-        [Display(Name = "Подкатегория")]
-        public string UnderCategory { get; set; }
-
         [Required]
         [Display(Name = "Цена")]
+        [Range(1, int.MaxValue, ErrorMessage = "Введите целое положительное число")]
         public decimal Price { get; set; }
 
         [Display(Name = "Описание")]

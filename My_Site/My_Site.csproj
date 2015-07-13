@@ -202,6 +202,10 @@
     <Compile Include="Migrations\201507131042468_4.Designer.cs">
       <DependentUpon>201507131042468_4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201507132147397_5.cs" />
+    <Compile Include="Migrations\201507132147397_5.Designer.cs">
+      <DependentUpon>201507132147397_5.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cart.cs" />
@@ -211,9 +215,6 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\SparePartListViewModel.cs" />
     <Compile Include="NavigationController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PagesController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -338,10 +339,10 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>T4MVC.cs</LastGenOutput>
     </None>
+    <Content Include="Views\Admin\SearchResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Pages\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -362,6 +363,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201507131042468_4.resx">
       <DependentUpon>201507131042468_4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507132147397_5.resx">
+      <DependentUpon>201507132147397_5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

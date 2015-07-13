@@ -7,10 +7,17 @@
 
 <div class="panel">
     <div class="panel-heading">
+    @if (@Model.MarkWithModel != " ")
+    { 
         <h3>Редактирование «@Model.MarkWithModel»</h3>
+    }
+    else
+    {
+        <h3>Добавление нового товара:</h3>
+    }
     </div>
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Edit", "Admin", FormMethod.Post))
     {
         @Html.ValidationSummary()
         <div class="panel-body">
@@ -24,9 +31,6 @@
                                 new { @class = "form-control" })
                 @Html.LabelFor(x => x.Category)
                 @Html.TextBoxFor(x => x.Category,
-                                new { @class = "form-control" })
-                @Html.LabelFor(x => x.UnderCategory)
-                @Html.TextBoxFor(x => x.UnderCategory,
                                 new { @class = "form-control" })
                 @Html.LabelFor(x => x.Price)
                 @Html.TextBoxFor(x => x.Price,

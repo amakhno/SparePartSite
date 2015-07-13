@@ -33,7 +33,6 @@ public static partial class MVC
     public static My_Site.Controllers.HomeController Home = new My_Site.Controllers.T4MVC_HomeController();
     public static My_Site.Controllers.NavigationController Navigation = new My_Site.Controllers.T4MVC_NavigationController();
     public static My_Site.Controllers.SparePartController SparePart = new My_Site.Controllers.T4MVC_SparePartController();
-    public static T4MVC.PagesController Pages = new T4MVC.PagesController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
 }
 
@@ -132,6 +131,8 @@ namespace Links
         public static readonly string bootstrap_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap.min.css") ? Url("bootstrap.min.css") : Url("bootstrap.css");
              
         public static readonly string bootstrap_min_css = Url("bootstrap.min.css");
+        public static readonly string ErrorStyles_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ErrorStyles.min.css") ? Url("ErrorStyles.min.css") : Url("ErrorStyles.css");
+             
         public static readonly string Site_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Site.min.css") ? Url("Site.min.css") : Url("Site.css");
              
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -282,6 +283,7 @@ namespace Links
             {
                 public const string bootstrap_css = "~/Content/bootstrap.css";
                 public const string bootstrap_min_css = "~/Content/bootstrap.min.css";
+                public const string ErrorStyles_css = "~/Content/ErrorStyles.css";
                 public const string Site_css = "~/Content/Site.css";
             }
         }
