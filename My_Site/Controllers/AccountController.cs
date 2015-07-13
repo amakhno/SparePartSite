@@ -26,7 +26,7 @@ namespace My_Site.Controllers
         }
 
         public UserManager<ApplicationUser> UserManager { get; private set; }
-
+        RoleManager<IdentityRole> roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>());
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -66,6 +66,8 @@ namespace My_Site.Controllers
         [AllowAnonymous]
         public virtual ActionResult Register()
         {
+            IdentityRole userRole = new IdentityRole("User");
+            roleManager.Create(userRole);
             return View();
         }
 
@@ -78,12 +80,12 @@ namespace My_Site.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.UserName, Email = model.email};
+                var user = new ApplicationUser() {UserName = model.UserName, Email = model.email};                
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    UserManager.AddToRole(user.Id, "User");
                     await SignInAsync(user, isPersistent: false);
-                    ApplicationUser a = UserManager.FindByName(user.UserName); 
                     return RedirectToAction("Index", "Home");
                 }
                 else

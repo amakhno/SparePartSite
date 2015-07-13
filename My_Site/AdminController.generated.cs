@@ -59,12 +59,6 @@ namespace My_Site.App_Start
             return RedirectToActionPermanent(taskResult.Result);
         }
 
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ViewResult Edit()
-        {
-            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Edit);
-        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public AdminController Actions { get { return MVC.Admin; } }
@@ -102,7 +96,7 @@ namespace My_Site.App_Start
         public class ActionParamsClass_Edit
         {
             public readonly string spareId = "spareId";
-            public readonly string model = "model";
+            public readonly string spare = "spare";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -164,14 +158,14 @@ namespace My_Site.App_Start
         }
 
         [NonAction]
-        partial void EditOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, My_Site.Models.SparePart model);
+        partial void EditOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, My_Site.Models.SparePart spare);
 
         [NonAction]
-        public override System.Web.Mvc.ViewResult Edit(My_Site.Models.SparePart model)
+        public override System.Web.Mvc.ViewResult Edit(My_Site.Models.SparePart spare)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Edit);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
-            EditOverride(callInfo, model);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "spare", spare);
+            EditOverride(callInfo, spare);
             return callInfo;
         }
 

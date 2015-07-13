@@ -35,8 +35,6 @@ namespace My_Site.Models
         [Display(Name = "В наличии")]
         public int Quantity { get; set; }
 
-        public byte[] ImageData { get; set; }
-
         public string MarkWithModel { get { return Mark + " " + Model; } }
     }
 }

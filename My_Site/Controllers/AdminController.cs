@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using My_Site.Models;
 
 
+
 namespace My_Site.App_Start
 {
     [Authorize]
@@ -31,27 +32,28 @@ namespace My_Site.App_Start
         {
             return View(db.SpareParts);
         }
-
-        public virtual ViewResult Edit(int spareId)
+        
+        public virtual ViewResult Edit(int spareId = 1)
         {
-            return View(db.SpareParts.Where(x => x.Id == spareId).First());
+            SparePart spare = db.SpareParts.Where(a => a.Id == spareId).First();
+            return View(spare);
         }
-
+        
         [HttpPost]
-        public virtual ViewResult Edit(SparePart model)
+        public virtual ViewResult Edit(SparePart spare)
         {
             if (ModelState.IsValid)
             {
-                SaveGame(model);
-                TempData["message"] = string.Format("Изменения в игре \"{0}\" были сохранены", model.MarkWithModel);
+                SaveGame(spare);
+                TempData["message"] = string.Format("Изменения в игре \"{0}\" были сохранены", spare.MarkWithModel);
                 return View("Index", db.SpareParts);
             }
-            return View(model);
+            return View(spare);
         }
 
         private void SaveGame(SparePart sparepart)
         {
-            if (sparepart.Id== 0)
+            if (sparepart.Id == 0)
                 db.SpareParts.Add(sparepart);
             else
             {
