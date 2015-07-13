@@ -16,17 +16,19 @@ namespace My_Site.Controllers
     public partial class AccountController : Controller
     {
         public AccountController()
-            : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())))
+            : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())),
+                   new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext())))
         {
         }
 
-        public AccountController(UserManager<ApplicationUser> userManager)
+        public AccountController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             UserManager = userManager;
+            RoleManager = roleManager;
         }
 
         public UserManager<ApplicationUser> UserManager { get; private set; }
-        RoleManager<IdentityRole> roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>());
+        public RoleManager<IdentityRole> RoleManager { get; private set; }
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -67,7 +69,7 @@ namespace My_Site.Controllers
         public virtual ActionResult Register()
         {
             IdentityRole userRole = new IdentityRole("User");
-            roleManager.Create(userRole);
+            RoleManager.Create(userRole);
             return View();
         }
 

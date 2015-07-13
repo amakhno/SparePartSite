@@ -206,7 +206,6 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\CartIndexViewModel.cs" />
-    <Compile Include="Models\GuestResponse.cs" />
     <Compile Include="Models\PagingInfo.cs" />
     <Compile Include="Models\SparePart.cs" />
     <Compile Include="Models\IdentityModels.cs" />

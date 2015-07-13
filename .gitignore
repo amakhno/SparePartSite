@@ -198,3 +198,4 @@ FakesAssemblies/
 # Visual Studio 6 workspace options file
 *.opt
 My_Site/Scripts/_references.js
+My_Site/My_Site.csproj

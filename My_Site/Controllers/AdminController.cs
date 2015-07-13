@@ -35,7 +35,7 @@ namespace My_Site.App_Start
         
         public virtual ViewResult Edit(int spareId = 1)
         {
-            SparePart spare = db.SpareParts.Where(a => a.Id == spareId).First();
+            SparePart spare = db.SpareParts.First(x => x.Id == spareId);
             return View(spare);
         }
         

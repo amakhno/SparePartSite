@@ -16,25 +16,25 @@
         <div class="panel-body">
             @Html.HiddenFor(m => m.Id)
             <div class="form-group">
-                <label>@Html.LabelFor(x => x.Mark)</label>
+                @Html.LabelFor(x => x.Mark)
                 @Html.TextBoxFor(x => x.Mark,
                                 new { @class = "form-control" })
-                <label>@Html.LabelFor(x => x.Model)</label>
+                @Html.LabelFor(x => x.Model)
                 @Html.TextBoxFor(x => x.Model,
                                 new { @class = "form-control" })
-                <label>@Html.LabelFor(x => x.Category)</label>
+                @Html.LabelFor(x => x.Category)
                 @Html.TextBoxFor(x => x.Category,
                                 new { @class = "form-control" })
-                <label>@Html.LabelFor(x => x.UnderCategory)</label>
+                @Html.LabelFor(x => x.UnderCategory)
                 @Html.TextBoxFor(x => x.UnderCategory,
                                 new { @class = "form-control" })
-                <label>@Html.LabelFor(x => x.Price)</label>
+                @Html.LabelFor(x => x.Price)
                 @Html.TextBoxFor(x => x.Price,
                                 new { @class = "form-control" })
-                <label>@Html.LabelFor(x => x.Description)</label>
+                @Html.LabelFor(x => x.Description)
                 @Html.TextAreaFor(x=>x.Description, 5, 200,
                         new { @class = "form-control", rows = 5 })
-                <label>@Html.LabelFor(x => x.Quantity)</label>
+                @Html.LabelFor(x => x.Quantity)
                 @Html.TextBoxFor(x => x.Quantity,
                                 new { @class = "form-control" })
 
