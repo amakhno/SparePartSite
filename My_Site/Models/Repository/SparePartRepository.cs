@@ -9,11 +9,11 @@ namespace My_Site.Models.Repository
 {
     public class SparePartRepository : ISparePartRepository
     {
-        ApplicationDbContext db = new ApplicationDbContext();
+        DbContext db;
 
         public DbSet<SparePart> TakeAll()
         {
-            return db.SpareParts;
+            return db.Get_Context().SpareParts;
         }
     }
 }
