@@ -71,12 +71,6 @@ namespace My_Site.App_Start
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Delete);
         }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult SearchResult()
-        {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.SearchResult);
-        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public AdminController Actions { get { return MVC.Admin; } }
@@ -93,23 +87,19 @@ namespace My_Site.App_Start
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string Check = "Check";
             public readonly string Index = "Index";
             public readonly string Create = "Create";
             public readonly string Edit = "Edit";
             public readonly string Delete = "Delete";
-            public readonly string SearchResult = "SearchResult";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
-            public const string Check = "Check";
             public const string Index = "Index";
             public const string Create = "Create";
             public const string Edit = "Edit";
             public const string Delete = "Delete";
-            public const string SearchResult = "SearchResult";
         }
 
 
@@ -120,6 +110,8 @@ namespace My_Site.App_Start
         public class ActionParamsClass_Index
         {
             public readonly string page = "page";
+            public readonly string search = "search";
+            public readonly string listView = "listView";
         }
         static readonly ActionParamsClass_Edit s_params_Edit = new ActionParamsClass_Edit();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -138,16 +130,6 @@ namespace My_Site.App_Start
         {
             public readonly string spareId = "spareId";
         }
-        static readonly ActionParamsClass_SearchResult s_params_SearchResult = new ActionParamsClass_SearchResult();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_SearchResult SearchResultParams { get { return s_params_SearchResult; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_SearchResult
-        {
-            public readonly string listView = "listView";
-            public readonly string search = "search";
-            public readonly string page = "page";
-        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -158,15 +140,11 @@ namespace My_Site.App_Start
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
-                public readonly string Check = "Check";
                 public readonly string Edit = "Edit";
                 public readonly string Index = "Index";
-                public readonly string SearchResult = "SearchResult";
             }
-            public readonly string Check = "~/Views/Admin/Check.cshtml";
             public readonly string Edit = "~/Views/Admin/Edit.cshtml";
             public readonly string Index = "~/Views/Admin/Index.cshtml";
-            public readonly string SearchResult = "~/Views/Admin/SearchResult.cshtml";
         }
     }
 
@@ -176,25 +154,15 @@ namespace My_Site.App_Start
         public T4MVC_AdminController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void CheckOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo);
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int page, string search);
 
         [NonAction]
-        public override System.Web.Mvc.PartialViewResult Check()
+        public override System.Web.Mvc.ActionResult Index(int page, string search)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Check);
-            CheckOverride(callInfo);
-            return callInfo;
-        }
-
-        [NonAction]
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, int page);
-
-        [NonAction]
-        public override System.Web.Mvc.ViewResult Index(int page)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Index);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "page", page);
-            IndexOverride(callInfo, page);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "search", search);
+            IndexOverride(callInfo, page, search);
             return callInfo;
         }
 
@@ -246,27 +214,14 @@ namespace My_Site.App_Start
         }
 
         [NonAction]
-        partial void SearchResultOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, My_Site.Models.SparePartListViewModel listView);
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, My_Site.Models.SparePartListViewModel listView);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult SearchResult(My_Site.Models.SparePartListViewModel listView)
+        public override System.Web.Mvc.ViewResult Index(My_Site.Models.SparePartListViewModel listView)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.SearchResult);
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Index);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "listView", listView);
-            SearchResultOverride(callInfo, listView);
-            return callInfo;
-        }
-
-        [NonAction]
-        partial void SearchResultOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string search, int page);
-
-        [NonAction]
-        public override System.Web.Mvc.ActionResult SearchResult(string search, int page)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.SearchResult);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "search", search);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "page", page);
-            SearchResultOverride(callInfo, search, page);
+            IndexOverride(callInfo, listView);
             return callInfo;
         }
 

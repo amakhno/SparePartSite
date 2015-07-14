@@ -49,7 +49,11 @@ namespace My_Site.Controllers
             {
                 cart.RemoveLine(sparepart);
             }
-            return RedirectToAction(Views.Index, new { returnUrl });
+            return View("Index", new CartIndexViewModel
+            {
+                Cart = cart,
+                ReturnUrl = returnUrl
+            });
         }
 
         [AllowAnonymous]

@@ -7,7 +7,7 @@
 
 <div class="panel">
     <div class="panel-heading">
-    @if (@Model.MarkWithModel != " ")
+    @if (!string.IsNullOrWhiteSpace(Model.MarkWithModel))
     { 
         <h3>Редактирование «@Model.MarkWithModel»</h3>
     }

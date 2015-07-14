@@ -19,20 +19,27 @@ namespace My_Site.App_Start
         // GET: /Admin/
         [HttpGet]
         [AllowAnonymous]
-        public virtual PartialViewResult Check()
+        private bool Check()
         {
             bool isAdmin = false;
             if (User.Identity.IsAuthenticated)
             {
                 isAdmin = db.Users.Where(x => x.UserName == User.Identity.Name).FirstOrDefault().Roles.Where(x => x.Role.Name == "Admin").Count()>0;
             }
-            return PartialView(isAdmin);
+            return isAdmin;
         }
 
         //MainAdminPage
-        public virtual ViewResult Index( int page = 1)
+        public virtual ActionResult Index(int page = 1, string search = null)
         {
-            return View(CreateIndex());
+            if(Check())
+            {
+                return View(new SparePartListViewModel(null, page, search, pageSize));
+            }
+            else 
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         public virtual ViewResult Create()
@@ -51,23 +58,11 @@ namespace My_Site.App_Start
         {
             if (ModelState.IsValid)
             {
-                SavePart(spare);
+                spare.SavePart();
                 TempData["message"] = string.Format("Изменения в товаре \"{0}\" были сохранены", spare.MarkWithModel);
-                return View("Index", CreateIndex());
+                return View("Index", new SparePartListViewModel(pageSize));
             }
             return View(spare);
-        }
-
-        private void SavePart(SparePart sparepart)
-        {
-            if (sparepart.Id == 0)
-                db.SpareParts.Add(sparepart);
-            else
-            {
-                SparePart dbEntry = db.SpareParts.Find(sparepart.Id);
-                db.Entry(dbEntry).CurrentValues.SetValues(sparepart);
-            }
-            db.SaveChanges();
         }
 
         public virtual ActionResult Delete(int spareId)
@@ -80,63 +75,13 @@ namespace My_Site.App_Start
                 TempData["message"] = string.Format("Товар \"{0}\" был удален",
                     deleted.MarkWithModel);
             }
-            return View("Index", CreateIndex());
+            return View("Index", new SparePartListViewModel(null, 1, null, pageSize));
         }
 
-        //Инициализация поиска
         [HttpPost]
-        public virtual ActionResult SearchResult(SparePartListViewModel listView)
-        {
-            SparePartListViewModel searchMemory = new SparePartListViewModel();
-            searchMemory.SpareParts = db.SpareParts
-                .Where(x => (listView.Search != null) && ((x.Mark.ToUpper().Contains(listView.Search.ToUpper())) || (x.Mark.ToUpper().Contains(listView.Search.ToUpper()))))
-                .OrderBy(x => x.Id)
-                .Take(pageSize);
-            searchMemory.PagingInfo = new PagingInfo
-                {
-                    CurrentPage = 1,
-                    ItemsPerPage = pageSize,
-                    TotalSpare = db.SpareParts
-                    .Where(x => (listView.Search != null) && ((x.Mark.ToUpper().Contains(listView.Search)) || (x.Mark.ToUpper().Contains(listView.Search)))).Count()
-                };
-            searchMemory.Search = listView.Search;
-            return View(searchMemory);
-        }
-
-        //Переход по страницам поиска
-        public virtual ActionResult SearchResult(string search, int page)
-        {
-            SparePartListViewModel searchMemory = new SparePartListViewModel();
-            searchMemory.SpareParts = db.SpareParts
-                .Where(x => (search != null) && ((x.Mark.ToUpper().Contains(search.ToUpper())) || (x.Mark.ToUpper().Contains(search.ToUpper()))))
-                .OrderBy(x => x.Id)
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize);
-            searchMemory.PagingInfo = new PagingInfo
-            {
-                CurrentPage = page,
-                ItemsPerPage = pageSize,
-                TotalSpare = db.SpareParts.Where(x => (search != null) && ((x.Mark.ToUpper().Contains(search)) || (x.Mark.ToUpper().Contains(search)))).Count()
-            };
-            searchMemory.Search = search;
-            return View(searchMemory);
-        }
-
-        private SparePartListViewModel CreateIndex()
-        {
-            SparePartListViewModel model = new SparePartListViewModel
-            {
-                SpareParts = db.SpareParts
-                .OrderBy(x => x.Id)
-                .Take(pageSize),
-                PagingInfo = new PagingInfo
-                {
-                    CurrentPage = 1,
-                    ItemsPerPage = pageSize,
-                    TotalSpare = db.SpareParts.Count()
-                },
-            };
-            return(model);
+        public virtual ViewResult Index(SparePartListViewModel listView)
+        {            
+            return View(new SparePartListViewModel(null, 1, listView.Search, pageSize));
         }
 	}    
 }
