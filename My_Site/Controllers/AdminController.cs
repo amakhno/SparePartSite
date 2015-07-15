@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using My_Site.Models;
 using Autofac;
 using Autofac.Integration.Mvc;
+using My_Site.Models.Repository;
 
 
 
@@ -15,7 +16,7 @@ namespace My_Site.App_Start
     public partial class AdminController : Controller
     {
         private readonly ISparePartRepository _db;
-        int pageSize = 20;
+        int pageSize = 50;
 
         public AdminController(ISparePartRepository repo)
         {
@@ -25,49 +26,49 @@ namespace My_Site.App_Start
         //MainAdminPage
         public virtual ActionResult Index(int page = 1, string search = null)
         {
-                return View(new SparePartListViewModel(null, page, search, pageSize));
+            return View(_db.Search(null, page, search, pageSize));
         }
 
         public virtual ViewResult Create()
         {
-            return Edit(new SparePart());
+            return View("Edit", new SparePart());
         }
 
         public virtual ViewResult Edit(int spareId)
         {
-            SparePart spare = _db.TakeAll().First(x => x.Id == spareId);
+            SparePart spare = _db.FindById(spareId);
             return View(spare);
         }
         
         [HttpPost]
-        public virtual ViewResult Edit(SparePart spare)
+        public virtual ViewResult Edit(SparePart sparePart)
         {
             if (ModelState.IsValid)
             {
-                spare.SavePart();
-                TempData["message"] = string.Format("Изменения в товаре \"{0}\" были сохранены", spare.MarkWithModel);
-                return View("Index", new SparePartListViewModel(pageSize));
+                _db.SavePart(sparePart);
+                TempData["message"] = string.Format("Изменения в товаре \"{0}\" были сохранены", sparePart.MarkWithModel);
+                return View("Index", _db.Search(null, 1, null, pageSize));
             }
-            return View(spare);
+            return View(sparePart);
         }
 
         public virtual ActionResult Delete(int spareId)
         {
-            SparePart deleted = _db.TakeAll().First(x => x.Id == spareId);
+            SparePart deleted = _db.FindById(spareId);
             if (deleted != null)
             {
-                _db.TakeAll().Remove(deleted);
-               // db.SaveChanges();
+                _db.Remove(spareId);
+
                 TempData["message"] = string.Format("Товар \"{0}\" был удален",
                     deleted.MarkWithModel);
             }
-            return View("Index", new SparePartListViewModel(null, 1, null, pageSize));
+            return View("Index", _db.Search(null, 1, null, pageSize));
         }
 
         [HttpPost]
         public virtual ViewResult Index(SparePartListViewModel listView)
-        {            
-            return View(new SparePartListViewModel(null, 1, listView.Search, pageSize));
+        {
+            return View(_db.Search(null, 1, listView.Search, pageSize));
         }
 	}    
 }

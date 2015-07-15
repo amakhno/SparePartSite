@@ -33,19 +33,6 @@ namespace My_Site.Models
         [Display(Name = "В наличии")]
         public int Quantity { get; set; }
 
-        public string MarkWithModel { get { return Mark + " " + Model; } }
-
-        public void SavePart()
-        {
-            ApplicationDbContext db = new ApplicationDbContext();
-            if (this.Id == 0)
-                db.SpareParts.Add(this);
-            else
-            {
-                SparePart dbEntry = db.SpareParts.Find(this.Id);
-                db.Entry(dbEntry).CurrentValues.SetValues(this);
-            }
-            db.SaveChanges();
-        }
+        public string MarkWithModel { get { return Mark + " " + Model; } }        
     }
 }
