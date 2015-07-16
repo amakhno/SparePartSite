@@ -28,9 +28,6 @@ namespace My_Site.App_Start
     public partial class AdminController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public AdminController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected AdminController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -111,7 +108,6 @@ namespace My_Site.App_Start
         {
             public readonly string page = "page";
             public readonly string search = "search";
-            public readonly string listView = "listView";
         }
         static readonly ActionParamsClass_Edit s_params_Edit = new ActionParamsClass_Edit();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -120,7 +116,7 @@ namespace My_Site.App_Start
         public class ActionParamsClass_Edit
         {
             public readonly string spareId = "spareId";
-            public readonly string spare = "spare";
+            public readonly string sparePart = "sparePart";
         }
         static readonly ActionParamsClass_Delete s_params_Delete = new ActionParamsClass_Delete();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -190,14 +186,14 @@ namespace My_Site.App_Start
         }
 
         [NonAction]
-        partial void EditOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, My_Site.Models.SparePart spare);
+        partial void EditOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, My_Site.Models.SparePart sparePart);
 
         [NonAction]
-        public override System.Web.Mvc.ViewResult Edit(My_Site.Models.SparePart spare)
+        public override System.Web.Mvc.ViewResult Edit(My_Site.Models.SparePart sparePart)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Edit);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "spare", spare);
-            EditOverride(callInfo, spare);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "sparePart", sparePart);
+            EditOverride(callInfo, sparePart);
             return callInfo;
         }
 
@@ -210,18 +206,6 @@ namespace My_Site.App_Start
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Delete);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "spareId", spareId);
             DeleteOverride(callInfo, spareId);
-            return callInfo;
-        }
-
-        [NonAction]
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, My_Site.Models.SparePartListViewModel listView);
-
-        [NonAction]
-        public override System.Web.Mvc.ViewResult Index(My_Site.Models.SparePartListViewModel listView)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Index);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "listView", listView);
-            IndexOverride(callInfo, listView);
             return callInfo;
         }
 

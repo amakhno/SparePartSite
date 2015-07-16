@@ -4,7 +4,7 @@
 
 @{
     ViewBag.Title = "Управление сайтом";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";<!---->  
 }
 
 <div class="panel panel-default">
@@ -12,9 +12,9 @@
         <h3>Список товаров</h3>
     </div>
     <div class="panel-body">
-        @using (Html.BeginForm("Index", "Admin", FormMethod.Get))
-        { 
-            @Html.TextBoxFor(x=>x.Search)        
+        @using (Html.BeginForm("Index", "Admin", FormMethod.Get))      
+        {                 
+            @Html.TextBoxFor(x=>x.Search)
             <input type="submit" class="btn btn-success" value="Поиск" />  
             if (Model.SpareParts.Count() != 0)
             {
@@ -24,7 +24,7 @@
                 grid.Pager(WebGridPagerModes.All);
                 @grid.GetHtml(htmlAttributes: new { id = "gridd", @class = "table" },
             columns: grid.Columns(
-                    //grid.Column(format: (item) => Html.ActionLink("Edit", "Edit", new { EmployeeID = item.EmployeeID })),
+                //grid.Column(format: (item) => Html.ActionLink("Edit", "Edit", new { EmployeeID = item.EmployeeID })),
                     grid.Column("Id", "Id", canSort: true),
                     grid.Column("Mark", "Производитель"),
                     grid.Column(header: "Модель", format: (item) => Html.ActionLink((string)item.Model, "Edit", new { spareId = item.Id })),

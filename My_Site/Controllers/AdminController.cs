@@ -16,7 +16,6 @@ namespace My_Site.App_Start
     public partial class AdminController : Controller
     {
         private readonly ISparePartRepository _db;
-        private string Search = null;
         int pageSize = 50;
 
         public AdminController(ISparePartRepository repo)
@@ -27,7 +26,6 @@ namespace My_Site.App_Start
         //MainAdminPage
         public virtual ActionResult Index(int page = 1, string search = null)
         {
-            //search = 
             return View(_db.Search(null, page, search, pageSize));
         }
 
@@ -65,12 +63,6 @@ namespace My_Site.App_Start
                     deleted.MarkWithModel);
             }
             return View("Index", _db.Search(null, 1, null, pageSize));
-        }
-
-        [HttpPost]
-        public virtual ViewResult Index(SparePartListViewModel listView)
-        {
-            return View(_db.Search(null, 1, listView.Search, pageSize));
         }
 	}    
 }
