@@ -12,13 +12,17 @@
         <h3>Список товаров</h3>
     </div>
     <div class="panel-body">
-            @if (Model.SpareParts.Count() != 0)
+        @using (Html.BeginForm("Index", "Admin", FormMethod.Get))
+        { 
+            @Html.TextBoxFor(x=>x.Search)        
+            <input type="submit" class="btn btn-success" value="Поиск" />  
+            if (Model.SpareParts.Count() != 0)
             {
 
                 var grid = new WebGrid(canPage: true, rowsPerPage: 20, canSort: true, ajaxUpdateContainerId: "gridd");
                 grid.Bind(Model.SpareParts, rowCount: Model.SpareParts.Count(), autoSortAndPage: true);
                 grid.Pager(WebGridPagerModes.All);
-                @grid.GetHtml(htmlAttributes: new { id = "grid", @class = "table" },
+                @grid.GetHtml(htmlAttributes: new { id = "gridd", @class = "table" },
             columns: grid.Columns(
                     //grid.Column(format: (item) => Html.ActionLink("Edit", "Edit", new { EmployeeID = item.EmployeeID })),
                     grid.Column("Id", "Id", canSort: true),
@@ -57,16 +61,12 @@
             {
                 <h2>Ничего не найдено :(</h2>
             }
+        }
     </div>
     <div class="panel-footer">
         @Html.ActionLink("Добавить", "Create", null,
             new { @class = "btn btn-default" })
         <p>
-        @using ( Html.BeginForm("Index", "Admin"))
-        {
-            @Html.TextBoxFor(x=>x.Search)        
-            <input type="submit" class="btn btn-success" value="Поиск" />
-        }
     </div>
 </div>
 
