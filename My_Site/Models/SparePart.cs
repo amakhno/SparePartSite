@@ -21,11 +21,9 @@ namespace My_Site.Models
         [Display(Name = "Категория")]
         public string Category { get; set; }
 
-        [Display(Name = "Подкатегория")]
-        public string UnderCategory { get; set; }
-
         [Required]
         [Display(Name = "Цена")]
+        [Range(1, int.MaxValue, ErrorMessage = "Введите целое положительное число")]
         public decimal Price { get; set; }
 
         [Display(Name = "Описание")]
@@ -35,8 +33,19 @@ namespace My_Site.Models
         [Display(Name = "В наличии")]
         public int Quantity { get; set; }
 
-        public byte[] ImageData { get; set; }
-
         public string MarkWithModel { get { return Mark + " " + Model; } }
+
+        public void SavePart()
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            if (this.Id == 0)
+                db.SpareParts.Add(this);
+            else
+            {
+                SparePart dbEntry = db.SpareParts.Find(this.Id);
+                db.Entry(dbEntry).CurrentValues.SetValues(this);
+            }
+            db.SaveChanges();
+        }
     }
 }

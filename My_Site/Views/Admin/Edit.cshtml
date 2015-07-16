@@ -1,46 +1,48 @@
 ﻿@model My_Site.Models.SparePart
 
 @{
-    ViewBag.Title = "Редактирование";
+    ViewBag.Title = "Редактирование товара";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <div class="panel">
     <div class="panel-heading">
-        <h3>Редактирование товара «@Model.MarkWithModel»</h3>
+    @if (!string.IsNullOrWhiteSpace(Model.MarkWithModel))
+    { 
+        <h3>Редактирование «@Model.MarkWithModel»</h3>
+    }
+    else
+    {
+        <h3>Добавление нового товара:</h3>
+    }
     </div>
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Edit", "Admin", FormMethod.Post))
     {
+        @Html.ValidationSummary()
         <div class="panel-body">
             @Html.HiddenFor(m => m.Id)
-            @foreach (var property in ViewData.ModelMetadata.Properties)
-            {
-                if (property.PropertyName != "Id")
-                {
-                    <div class="form-group">
-                        <label>@(property.DisplayName ?? property.PropertyName)</label>
-                        @if (property.PropertyName == "Description")
-                        {
-                            @Html.TextArea(property.PropertyName, null,
-                                new { @class = "form-control", rows = 5 })
-                        }
-                        else
-                        {
-                            if (property.PropertyName=="ImageData")
-                            {
-                                @:Сюда добавлю фото
-                            }
-                            else
-                            { 
-                            @Html.TextBox(property.PropertyName, null,
+            <div class="form-group">
+                @Html.LabelFor(x => x.Mark)
+                @Html.TextBoxFor(x => x.Mark,
                                 new { @class = "form-control" })
-                            }
-                        }
-                        @Html.ValidationMessage(property.PropertyName)
-                    </div>
-                }
-            }
+                @Html.LabelFor(x => x.Model)
+                @Html.TextBoxFor(x => x.Model,
+                                new { @class = "form-control" })
+                @Html.LabelFor(x => x.Category)
+                @Html.TextBoxFor(x => x.Category,
+                                new { @class = "form-control" })
+                @Html.LabelFor(x => x.Price)
+                @Html.TextBoxFor(x => x.Price,
+                                new { @class = "form-control" })
+                @Html.LabelFor(x => x.Description)
+                @Html.TextAreaFor(x=>x.Description, 5, 200,
+                        new { @class = "form-control", rows = 5 })
+                @Html.LabelFor(x => x.Quantity)
+                @Html.TextBoxFor(x => x.Quantity,
+                                new { @class = "form-control" })
+
+            </div>                
         </div>
         <div class="panel-footer">
             <input type="submit" value="Сохранить" class="btn btn-primary" />

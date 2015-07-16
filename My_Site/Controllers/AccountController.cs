@@ -16,17 +16,19 @@ namespace My_Site.Controllers
     public partial class AccountController : Controller
     {
         public AccountController()
-            : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())))
+            : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())),
+                   new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext())))
         {
         }
 
-        public AccountController(UserManager<ApplicationUser> userManager)
+        public AccountController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             UserManager = userManager;
+            RoleManager = roleManager;
         }
 
         public UserManager<ApplicationUser> UserManager { get; private set; }
-
+        public RoleManager<IdentityRole> RoleManager { get; private set; }
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -66,6 +68,8 @@ namespace My_Site.Controllers
         [AllowAnonymous]
         public virtual ActionResult Register()
         {
+            IdentityRole userRole = new IdentityRole("User");
+            RoleManager.Create(userRole);
             return View();
         }
 
@@ -78,12 +82,12 @@ namespace My_Site.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.UserName, Email = model.email};
+                var user = new ApplicationUser() {UserName = model.UserName, Email = model.email};                
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    UserManager.AddToRole(user.Id, "User");
                     await SignInAsync(user, isPersistent: false);
-                    ApplicationUser a = UserManager.FindByName(user.UserName); 
                     return RedirectToAction("Index", "Home");
                 }
                 else

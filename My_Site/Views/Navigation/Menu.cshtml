@@ -27,8 +27,3 @@
     }, 
     new { @class = "btn btn-block btn-lg btn-warning"})
 </p>
-@if (User.Identity.IsAuthenticated)
-{ 
-    @Html.Action("Check", "Admin")
-}
-

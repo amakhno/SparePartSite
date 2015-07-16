@@ -61,21 +61,21 @@ namespace My_Site.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ViewResult Index()
+        public virtual System.Web.Mvc.ActionResult Index()
         {
-            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Index);
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.RedirectToRouteResult AddToCart()
+        public virtual System.Web.Mvc.ActionResult AddToCart()
         {
-            return new T4MVC_System_Web_Mvc_RedirectToRouteResult(Area, Name, ActionNames.AddToCart);
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.AddToCart);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.RedirectToRouteResult RemoveFromCart()
+        public virtual System.Web.Mvc.ActionResult RemoveFromCart()
         {
-            return new T4MVC_System_Web_Mvc_RedirectToRouteResult(Area, Name, ActionNames.RemoveFromCart);
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.RemoveFromCart);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -194,12 +194,12 @@ namespace My_Site.Controllers
         public T4MVC_CartController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, My_Site.Models.Cart cart, string returnUrl);
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, My_Site.Models.Cart cart, string returnUrl);
 
         [NonAction]
-        public override System.Web.Mvc.ViewResult Index(My_Site.Models.Cart cart, string returnUrl)
+        public override System.Web.Mvc.ActionResult Index(My_Site.Models.Cart cart, string returnUrl)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Index);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "cart", cart);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "returnUrl", returnUrl);
             IndexOverride(callInfo, cart, returnUrl);
@@ -207,12 +207,12 @@ namespace My_Site.Controllers
         }
 
         [NonAction]
-        partial void AddToCartOverride(T4MVC_System_Web_Mvc_RedirectToRouteResult callInfo, My_Site.Models.Cart cart, int spareId, string returnUrl);
+        partial void AddToCartOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, My_Site.Models.Cart cart, int spareId, string returnUrl);
 
         [NonAction]
-        public override System.Web.Mvc.RedirectToRouteResult AddToCart(My_Site.Models.Cart cart, int spareId, string returnUrl)
+        public override System.Web.Mvc.ActionResult AddToCart(My_Site.Models.Cart cart, int spareId, string returnUrl)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_RedirectToRouteResult(Area, Name, ActionNames.AddToCart);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.AddToCart);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "cart", cart);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "spareId", spareId);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "returnUrl", returnUrl);
@@ -221,12 +221,12 @@ namespace My_Site.Controllers
         }
 
         [NonAction]
-        partial void RemoveFromCartOverride(T4MVC_System_Web_Mvc_RedirectToRouteResult callInfo, My_Site.Models.Cart cart, int spareId, string returnUrl);
+        partial void RemoveFromCartOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, My_Site.Models.Cart cart, int spareId, string returnUrl);
 
         [NonAction]
-        public override System.Web.Mvc.RedirectToRouteResult RemoveFromCart(My_Site.Models.Cart cart, int spareId, string returnUrl)
+        public override System.Web.Mvc.ActionResult RemoveFromCart(My_Site.Models.Cart cart, int spareId, string returnUrl)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_RedirectToRouteResult(Area, Name, ActionNames.RemoveFromCart);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.RemoveFromCart);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "cart", cart);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "spareId", spareId);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "returnUrl", returnUrl);

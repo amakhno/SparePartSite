@@ -14,23 +14,7 @@ namespace My_Site.Controllers
 
         public virtual ActionResult List(string category = "Двигатель", int page = 1)
         {
-            SparePartListViewModel model = new SparePartListViewModel
-            {
-                SpareParts = db.SpareParts
-                .Where(p=>category == null||p.Category==category)
-                .OrderBy(x => x.Id)
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize),
-                PagingInfo = new PagingInfo
-                {
-                    CurrentPage = page,
-                    ItemsPerPage = pageSize,
-                    TotalSpare = category == null ?
-                    db.SpareParts.Count() :
-                    db.SpareParts.Where(game => game.Category == category).Count()
-                },
-                CurrentCategory = category
-            };
+            SparePartListViewModel model = new SparePartListViewModel(category, page, null, pageSize);
             return View(model);
         }
 

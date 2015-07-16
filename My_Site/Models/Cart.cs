@@ -39,8 +39,8 @@ namespace My_Site.Models
 
         public void RemoveLine(SparePart sparepart)
         {
-            PositionCollection
-                .RemoveAll(line => line.SparePart.Id == sparepart.Id);
+            var a = PositionCollection.RemoveAll(line => line.SparePart.Id == sparepart.Id);
+                
         }
 
         public decimal TotalPrice()

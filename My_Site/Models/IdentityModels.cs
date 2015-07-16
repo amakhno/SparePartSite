@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Data.Entity;
 using My_Site.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace My_Site.Models
 {

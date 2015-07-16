@@ -25,12 +25,7 @@
                     @((line.Quantity * line.SparePart.Price).ToString("# руб"))
                 </td>
                 <td>
-                    @using (Html.BeginForm("RemoveFromCart", "Cart"))
-                    {
-                        @Html.Hidden("spareId", line.SparePart.Id)
-                        @Html.HiddenFor(x => x.ReturnUrl)
-                        <input class="btn btn-sm btn-danger" type="submit" value="Удалить" />
-                    }
+                    @Html.ActionLink("Удалить", MVC.Cart.RemoveFromCart().AddRouteValues(new { spareId = line.SparePart.Id, returnUrl = Request.Url.PathAndQuery}))
                 </td>
             </tr>
         }

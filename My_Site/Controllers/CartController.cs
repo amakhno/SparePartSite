@@ -13,7 +13,7 @@ namespace My_Site.Controllers
         ApplicationDbContext db = new ApplicationDbContext();
 
         [AllowAnonymous]
-        public virtual ViewResult Index(Cart cart, string returnUrl = null)
+        public virtual ActionResult Index(Cart cart, string returnUrl = null)
         {
             return View(new CartIndexViewModel
             {
@@ -23,7 +23,7 @@ namespace My_Site.Controllers
         }
 
         [AllowAnonymous]
-        public virtual RedirectToRouteResult AddToCart(Cart cart, int spareId, string returnUrl)
+        public virtual ActionResult AddToCart(Cart cart, int spareId, string returnUrl)
         {
             SparePart sparepart = db.SpareParts
                 .FirstOrDefault(e => e.Id == spareId);
@@ -32,11 +32,15 @@ namespace My_Site.Controllers
             {
                 cart.AddItem(sparepart, 1);
             }
-            return RedirectToAction("Index", new { returnUrl });
+                return View(Views.Index, new CartIndexViewModel
+                    {
+                        Cart = cart,
+                        ReturnUrl = returnUrl
+                    });
         }
 
         [AllowAnonymous]
-        public virtual RedirectToRouteResult RemoveFromCart(Cart cart, int spareId, string returnUrl)
+        public virtual ActionResult RemoveFromCart(Cart cart, int spareId, string returnUrl)
         {
             SparePart sparepart = db.SpareParts
                 .FirstOrDefault(g => g.Id == spareId);
@@ -45,7 +49,11 @@ namespace My_Site.Controllers
             {
                 cart.RemoveLine(sparepart);
             }
-            return RedirectToAction("Index", new { returnUrl });
+            return View("Index", new CartIndexViewModel
+            {
+                Cart = cart,
+                ReturnUrl = returnUrl
+            });
         }
 
         [AllowAnonymous]
