@@ -12,9 +12,24 @@
         <h3>Список товаров</h3>
     </div>
     <div class="panel-body">
-        @if (Model.SpareParts.Count()!=0)
-        { 
-            <table class="table table-striped table-condensed table-bordered">
+            @if (Model.SpareParts.Count() != 0)
+            {
+
+                var grid = new WebGrid(canPage: true, rowsPerPage: 20, canSort: true, ajaxUpdateContainerId: "gridd");
+                grid.Bind(Model.SpareParts, rowCount: Model.SpareParts.Count(), autoSortAndPage: true);
+                grid.Pager(WebGridPagerModes.All);
+                @grid.GetHtml(htmlAttributes: new { id = "grid", @class = "table" },
+            columns: grid.Columns(
+                    //grid.Column(format: (item) => Html.ActionLink("Edit", "Edit", new { EmployeeID = item.EmployeeID })),
+                    grid.Column("Id", "Id", canSort: true),
+                    grid.Column("Mark", "Производитель"),
+                    grid.Column(header: "Модель", format: (item) => Html.ActionLink((string)item.Model, "Edit", new { spareId = item.Id })),
+                    grid.Column("Price", "Цена"),
+                    grid.Column("Quantity", "В наличии"),
+                    grid.Column(format: (item) => Html.ActionLink("Удалить", "Delete", new { spareId = item.Id }, new { @class = "btn btn-default btn-xs" }))
+            ));
+
+                <!--<table class="table table-striped table-condensed table-bordered">
                 <tr>
                     <th class="text-right">ID</th>
                     <th>Название</th>
@@ -32,30 +47,22 @@
                         <td class="text-right">@item.Price.ToString("# руб")</td>
                         <td class="text-right">@item.Quantity</td>
                         <td class="text-center">
-                            @Html.ActionLink("Удалить", "Delete", new { spareId = item.Id }, new { @class = "btn btn-default btn-xs" })                        
+                            @Html.ActionLink("Удалить", "Delete", new { spareId = item.Id }, new { @class = "btn btn-default btn-xs" })
                         </td>
                     </tr>
                 }
-            </table>
-        }
-        else
-        {
-            <h2>Ничего не найдено :(</h2>
-        }
+            </table>-->
+            }
+            else
+            {
+                <h2>Ничего не найдено :(</h2>
+            }
     </div>
     <div class="panel-footer">
         @Html.ActionLink("Добавить", "Create", null,
             new { @class = "btn btn-default" })
-        @if (Model.Search==null)
-        {
-            <p>Страницы: @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { page = x }))</p>
-        }
-        else 
-        {
-            <p>Страницы: @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { page = x, search = Model.Search }))</p>
-        }
         <p>
-        @using (Html.BeginForm("Index", "Admin"))
+        @using ( Html.BeginForm("Index", "Admin"))
         {
             @Html.TextBoxFor(x=>x.Search)        
             <input type="submit" class="btn btn-success" value="Поиск" />
