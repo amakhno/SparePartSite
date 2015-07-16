@@ -222,7 +222,6 @@
     <Compile Include="Models\Intefaces\ISparePartRepository.cs" />
     <Compile Include="Models\Layers\RepositoryLayer.cs" />
     <Compile Include="Models\PagingInfo.cs" />
-    <Compile Include="Models\Repository\BaseRepository.cs" />
     <Compile Include="Models\Repository\SparePartRepository.cs" />
     <Compile Include="Models\Singleton.cs" />
     <Compile Include="Models\SparePart.cs" />
@@ -336,7 +335,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Categories.cshtml" />
     <Content Include="Views\Shared\_LayoutWithoutCategories.cshtml" />
-    <Content Include="Views\SparePart\List.cshtml" />
+    <Content Include="Views\Shared\List.cshtml" />
     <Content Include="Views\Shared\_SparePartWithDesc.cshtml" />
     <Content Include="Views\Navigation\Menu.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />

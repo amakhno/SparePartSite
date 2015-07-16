@@ -10,10 +10,6 @@ namespace My_Site.Models
 {
     public interface ISparePartRepository
     {
-        IEnumerable<SparePart> TakeAll();
-        SparePartListViewModel Search(string category, int page, string search, int pageSize);
-        SparePart FindById(int spareId);
-        void Remove(int spareId);
-        void SavePart(SparePart sparePart);
+        DbSet<SparePart> TakeAll();
     }
 }

@@ -20,14 +20,9 @@ namespace My_Site
         {
             var builder = new ContainerBuilder();
 
-            // регистрируем контроллер в текущей сборке
-            builder.RegisterControllers(typeof(MvcApplication).Assembly);
-
-            // регистрируем споставление типов
             builder.RegisterModule(new RepositoryLayer());
 
-            // создаем новый контейнер с теми зависимостями, которые определены выше
-            var container = builder.Build();
+            IContainer container = builder.Build();
 
             // Setup DI as default MVC controller factory
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
