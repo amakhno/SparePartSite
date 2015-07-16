@@ -63,7 +63,9 @@ namespace My_Site.Models.Repository
             Run(db =>
             {
                 if (sparePart.Id == 0)
+                {
                     db.SpareParts.Add(sparePart);
+                }
                 else
                 {
                     SparePart dbEntry = db.SpareParts.Find(sparePart.Id);

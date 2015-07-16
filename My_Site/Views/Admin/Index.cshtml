@@ -4,7 +4,7 @@
 
 @{
     ViewBag.Title = "Управление сайтом";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";<!---->  
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";<!--(Ajax.BeginForm("Index", null)-->  
 }
 
 <div class="panel panel-default">
@@ -14,14 +14,12 @@
     <div class="panel-body">
         @using (Html.BeginForm("Index", "Admin", FormMethod.Get))      
         {                 
-            @Html.TextBoxFor(x=>x.Search)
+            <input type="text" name="search" />
             <input type="submit" class="btn btn-success" value="Поиск" />  
             if (Model.SpareParts.Count() != 0)
             {
-
                 var grid = new WebGrid(canPage: true, rowsPerPage: 20, canSort: true, ajaxUpdateContainerId: "gridd");
                 grid.Bind(Model.SpareParts, rowCount: Model.SpareParts.Count(), autoSortAndPage: true);
-                grid.Pager(WebGridPagerModes.All);
                 @grid.GetHtml(htmlAttributes: new { id = "gridd", @class = "table" },
             columns: grid.Columns(
                 //grid.Column(format: (item) => Html.ActionLink("Edit", "Edit", new { EmployeeID = item.EmployeeID })),
