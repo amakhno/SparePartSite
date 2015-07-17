@@ -18,7 +18,6 @@ namespace My_Site.Models
         public int Status { get; set; }
         public decimal TotalPrice { get; set; }
         public Cart Cart { get; set; }
-        //public ICollection<CartPosition> CartPositions { get; set; }
 
         public string ApplicationUserId { get; set; }
         [ForeignKey("ApplicationUserId")]
