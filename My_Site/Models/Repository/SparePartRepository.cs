@@ -76,6 +76,18 @@ namespace My_Site.Models.Repository
             });
         }
 
+        public IEnumerable<string> TakeCategories()
+        {
+            IEnumerable<string> strings = null;
+            Run(db =>
+            {
+                strings = db.SpareParts
+                .Select(x => x.Category)
+                .Distinct()
+                .OrderBy(x => x).ToArray();
+            });
+            return strings;
+        }
 
     }
 }

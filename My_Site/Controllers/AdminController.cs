@@ -37,7 +37,7 @@ namespace My_Site.App_Start
         public virtual ActionResult Edit(int spareId)
         {
             SparePart spare = _db.FindById(spareId);
-            return PartialView(spare);
+            return View(spare);
         }
         
         [HttpPost]

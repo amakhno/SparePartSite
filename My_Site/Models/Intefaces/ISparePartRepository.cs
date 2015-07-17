@@ -11,6 +11,7 @@ namespace My_Site.Models
     public interface ISparePartRepository
     {
         IEnumerable<SparePart> TakeAll();
+        IEnumerable<string> TakeCategories();
         SparePartListViewModel Search(string category, int page, string search, int pageSize);
         SparePart FindById(int spareId);
         void Remove(int spareId);

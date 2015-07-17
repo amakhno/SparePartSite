@@ -12,7 +12,7 @@
         <h3>Список товаров</h3>
     </div>
     <div class="panel-body">
-        @using (Html.BeginForm("Index", "Admin", FormMethod.Get))      
+        @using (Html.BeginForm("Index", "Admin", FormMethod.Post))      
         {                 
             <input type="text" name="search" />
             <input type="submit" class="btn btn-success" value="Поиск" />  

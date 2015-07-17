@@ -214,13 +214,43 @@
     <Compile Include="Migrations\201507132147397_5.Designer.cs">
       <DependentUpon>201507132147397_5.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201507171126081_6.cs" />
+    <Compile Include="Migrations\201507171126081_6.Designer.cs">
+      <DependentUpon>201507171126081_6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507171135040_7.cs" />
+    <Compile Include="Migrations\201507171135040_7.Designer.cs">
+      <DependentUpon>201507171135040_7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507171206117_8.cs" />
+    <Compile Include="Migrations\201507171206117_8.Designer.cs">
+      <DependentUpon>201507171206117_8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507171244210_9.cs" />
+    <Compile Include="Migrations\201507171244210_9.Designer.cs">
+      <DependentUpon>201507171244210_9.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507171247066_10.cs" />
+    <Compile Include="Migrations\201507171247066_10.Designer.cs">
+      <DependentUpon>201507171247066_10.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507171248365_11.cs" />
+    <Compile Include="Migrations\201507171248365_11.Designer.cs">
+      <DependentUpon>201507171248365_11.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507171307111_12.cs" />
+    <Compile Include="Migrations\201507171307111_12.Designer.cs">
+      <DependentUpon>201507171307111_12.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Adress.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\CartIndexViewModel.cs" />
     <Compile Include="Models\DbContext.cs" />
     <Compile Include="Models\Intefaces\ISparePartRepository.cs" />
     <Compile Include="Models\Layers\RepositoryLayer.cs" />
+    <Compile Include="Models\Order.cs" />
     <Compile Include="Models\PagingInfo.cs" />
     <Compile Include="Models\Repository\BaseRepository.cs" />
     <Compile Include="Models\Repository\SparePartRepository.cs" />
@@ -381,6 +411,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201507132147397_5.resx">
       <DependentUpon>201507132147397_5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507171126081_6.resx">
+      <DependentUpon>201507171126081_6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507171135040_7.resx">
+      <DependentUpon>201507171135040_7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507171206117_8.resx">
+      <DependentUpon>201507171206117_8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507171244210_9.resx">
+      <DependentUpon>201507171244210_9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507171247066_10.resx">
+      <DependentUpon>201507171247066_10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507171248365_11.resx">
+      <DependentUpon>201507171248365_11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507171307111_12.resx">
+      <DependentUpon>201507171307111_12.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

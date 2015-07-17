@@ -9,17 +9,17 @@ namespace My_Site.Controllers
 {
     public partial class NavigationController : Controller
     {
-        ApplicationDbContext db = new ApplicationDbContext();
+        readonly ISparePartRepository _db;
+
+        public NavigationController(ISparePartRepository db)
+        {
+            _db=db;
+        }
 
         public virtual PartialViewResult Menu(string category = null)
         {
             ViewBag.SelectedCategory = category;
-
-            IEnumerable<string> categories = db.SpareParts
-                .Select(x => x.Category)
-                .Distinct()
-                .OrderBy(x => x);
-            return PartialView(categories);
+            return PartialView(_db.TakeCategories());
         }
 	}
 }
