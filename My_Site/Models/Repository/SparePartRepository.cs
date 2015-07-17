@@ -55,6 +55,7 @@ namespace My_Site.Models.Repository
                 {
                     SparePart temp = db.SpareParts.First(x => x.Id == spareId);
                     db.SpareParts.Remove(temp);
+                    db.SaveChanges();
                 });
         }
 

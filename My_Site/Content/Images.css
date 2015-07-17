@@ -1,0 +1,15 @@
+﻿a.delete
+{
+    background: url(../Content/Images/del.png) no-repeat top left;
+     display: block;
+     width: 25px;
+     height: 25px;
+}
+
+a.edit
+{
+    background: url(../Content/Images/edit.png) no-repeat top left;
+     display: block;
+     width: 25px;
+     height: 25px;
+}

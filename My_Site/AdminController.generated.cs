@@ -58,9 +58,9 @@ namespace My_Site.App_Start
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ViewResult Edit()
+        public virtual System.Web.Mvc.ActionResult Edit()
         {
-            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Edit);
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -138,9 +138,11 @@ namespace My_Site.App_Start
             {
                 public readonly string Edit = "Edit";
                 public readonly string Index = "Index";
+                public readonly string Table = "Table";
             }
             public readonly string Edit = "~/Views/Admin/Edit.cshtml";
             public readonly string Index = "~/Views/Admin/Index.cshtml";
+            public readonly string Table = "~/Views/Admin/Table.cshtml";
         }
     }
 
@@ -174,24 +176,24 @@ namespace My_Site.App_Start
         }
 
         [NonAction]
-        partial void EditOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, int spareId);
+        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int spareId);
 
         [NonAction]
-        public override System.Web.Mvc.ViewResult Edit(int spareId)
+        public override System.Web.Mvc.ActionResult Edit(int spareId)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Edit);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "spareId", spareId);
             EditOverride(callInfo, spareId);
             return callInfo;
         }
 
         [NonAction]
-        partial void EditOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, My_Site.Models.SparePart sparePart);
+        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, My_Site.Models.SparePart sparePart);
 
         [NonAction]
-        public override System.Web.Mvc.ViewResult Edit(My_Site.Models.SparePart sparePart)
+        public override System.Web.Mvc.ActionResult Edit(My_Site.Models.SparePart sparePart)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Edit);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "sparePart", sparePart);
             EditOverride(callInfo, sparePart);
             return callInfo;

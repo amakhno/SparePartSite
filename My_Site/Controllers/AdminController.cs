@@ -26,7 +26,7 @@ namespace My_Site.App_Start
         //MainAdminPage
         public virtual ActionResult Index(int page = 1, string search = null)
         {
-            return View(_db.Search(null, page, search, pageSize));
+            return View("Index",_db.Search(null, page, search, pageSize));
         }
 
         public virtual ViewResult Create()
@@ -34,20 +34,20 @@ namespace My_Site.App_Start
             return View("Edit", new SparePart());
         }
 
-        public virtual ViewResult Edit(int spareId)
+        public virtual ActionResult Edit(int spareId)
         {
             SparePart spare = _db.FindById(spareId);
-            return View(spare);
+            return PartialView(spare);
         }
         
         [HttpPost]
-        public virtual ViewResult Edit(SparePart sparePart)
+        public virtual ActionResult Edit(SparePart sparePart)
         {
             if (ModelState.IsValid)
             {
                 _db.SavePart(sparePart);
                 TempData["message"] = string.Format("Изменения в товаре \"{0}\" были сохранены", sparePart.MarkWithModel);
-                return View("Index", _db.Search(null, 1, null, pageSize));
+                return RedirectToAction("Index");
             }
             return View(sparePart);
         }
@@ -58,11 +58,9 @@ namespace My_Site.App_Start
             if (deleted != null)
             {
                 _db.Remove(spareId);
-
-                TempData["message"] = string.Format("Товар \"{0}\" был удален",
-                    deleted.MarkWithModel);
+                TempData["message"] = string.Format("Товар \"{0}\" был удален", deleted.MarkWithModel);
             }
-            return View("Index", _db.Search(null, 1, null, pageSize));
+            return RedirectToAction("Index");
         }
 	}    
 }

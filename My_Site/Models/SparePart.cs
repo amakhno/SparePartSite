@@ -33,6 +33,7 @@ namespace My_Site.Models
         [Display(Name = "В наличии")]
         public int Quantity { get; set; }
 
-        public string MarkWithModel { get { return Mark + " " + Model; } }        
+        public string MarkWithModel { get { return Mark + " " + Model; } }
+        public string PriceString { get { return Price.ToString("# руб"); } }
     }
 }

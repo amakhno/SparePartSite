@@ -133,6 +133,15 @@ namespace Links
         public static readonly string bootstrap_min_css = Url("bootstrap.min.css");
         public static readonly string ErrorStyles_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ErrorStyles.min.css") ? Url("ErrorStyles.min.css") : Url("ErrorStyles.css");
              
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class Images {
+            private const string URLPATH = "~/Content/Images";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+        }
+    
+        public static readonly string Images_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Images.min.css") ? Url("Images.min.css") : Url("Images.css");
+             
         public static readonly string Site_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Site.min.css") ? Url("Site.min.css") : Url("Site.css");
              
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -241,6 +250,12 @@ namespace Links
         }
         public static partial class Content 
         {
+            public static partial class Images 
+            {
+                public static class Assets
+                {
+                }
+            }
             public static partial class themes 
             {
                 public static partial class @base 
@@ -284,6 +299,7 @@ namespace Links
                 public const string bootstrap_css = "~/Content/bootstrap.css";
                 public const string bootstrap_min_css = "~/Content/bootstrap.min.css";
                 public const string ErrorStyles_css = "~/Content/ErrorStyles.css";
+                public const string Images_css = "~/Content/Images.css";
                 public const string Site_css = "~/Content/Site.css";
             }
         }
