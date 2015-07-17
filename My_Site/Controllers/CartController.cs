@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using My_Site.Models;
+using My_Site.Models.Intefaces;
 
 namespace My_Site.Controllers
 {
@@ -12,10 +13,12 @@ namespace My_Site.Controllers
     public partial class CartController : Controller
     {
         readonly ISparePartRepository _db;
+        readonly IOrderRepository _odb;
 
-        public CartController(ISparePartRepository db)
+        public CartController(ISparePartRepository db, IOrderRepository odb)
         {
             _db=db;
+            _odb=odb;
         }
 
         [AllowAnonymous]
@@ -68,26 +71,9 @@ namespace My_Site.Controllers
 
         public virtual ActionResult Checkout(Cart cart)
         {
-            ApplicationDbContext db = new ApplicationDbContext();
-            ApplicationUser applicationUser = db.Users.First(x => x.UserName == User.Identity.Name);
-            Order order = new Order
-            {
-                CartPositions = cart.Positions.ToArray(),
-                Date = DateTime.Now,
-                ApplicationUserId = applicationUser.Id,
-                Adress = new Adress 
-                { 
-                    Country = "Russia",
-                    Region = "Vrn",
-                    City = "Voronezh",
-                    ZipCode = 396250,
-                    House = 19,
-                    Appartments = 0
-                }
-            };
-            db.Orders.Add(order);
-            db.SaveChanges();
-            return View();
+            ApplicationUser applicationUser = _odb.FindUserByName(User.Identity.Name);
+            Adress adress = _odb.TakeOldAdress(applicationUser.Id);
+            return View(adress);
         }
 
         [HttpPost]

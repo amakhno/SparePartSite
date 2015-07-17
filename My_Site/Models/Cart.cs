@@ -20,8 +20,6 @@ namespace My_Site.Models
 
         private List<CartPosition> PositionCollection = new List<CartPosition>();
 
-
-
         public void AddItem(SparePart sparepart, int quantity)
         {
             CartPosition CurrentPosition = PositionCollection
