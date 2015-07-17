@@ -15,7 +15,12 @@ namespace My_Site.Models
 
     public class Cart
     {
+        [Key]
+        public int CartId { get; set; }
+
         private List<CartPosition> PositionCollection = new List<CartPosition>();
+
+
 
         public void AddItem(SparePart sparepart, int quantity)
         {

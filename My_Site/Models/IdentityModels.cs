@@ -14,6 +14,8 @@ namespace My_Site.Models
     {
         public string Email
         {get; set;}
+
+        public virtual ICollection<Order> Orders { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -25,5 +27,6 @@ namespace My_Site.Models
         }
 
         public DbSet<SparePart> SpareParts { get; set; }
+        public DbSet<Order> Orders { get; set; }
     }
 }
