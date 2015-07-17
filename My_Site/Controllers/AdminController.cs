@@ -4,42 +4,29 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using My_Site.Models;
+using Autofac;
+using Autofac.Integration.Mvc;
+using My_Site.Models.Repository;
 
 
 
 namespace My_Site.App_Start
 {
-    [Authorize]
+    [Authorize(Roles="Admin")]
     public partial class AdminController : Controller
     {
-        ApplicationDbContext db = new ApplicationDbContext();
-        int pageSize = 20;
+        private readonly ISparePartRepository _db;
+        int pageSize = 50;
 
-        //
-        // GET: /Admin/
-        [HttpGet]
-        [AllowAnonymous]
-        private bool Check()
+        public AdminController(ISparePartRepository repo)
         {
-            bool isAdmin = false;
-            if (User.Identity.IsAuthenticated)
-            {
-                isAdmin = db.Users.Where(x => x.UserName == User.Identity.Name).FirstOrDefault().Roles.Where(x => x.Role.Name == "Admin").Count()>0;
-            }
-            return isAdmin;
+           _db = repo;
         }
 
         //MainAdminPage
         public virtual ActionResult Index(int page = 1, string search = null)
         {
-            if(Check())
-            {
-                return View(new SparePartListViewModel(null, page, search, pageSize));
-            }
-            else 
-            {
-                return RedirectToAction("Index", "Home");
-            }
+            return View("Index",_db.Search(null, page, search, pageSize));
         }
 
         public virtual ViewResult Create()
@@ -47,41 +34,33 @@ namespace My_Site.App_Start
             return View("Edit", new SparePart());
         }
 
-        public virtual ViewResult Edit(int spareId)
+        public virtual ActionResult Edit(int spareId)
         {
-            SparePart spare = db.SpareParts.First(x => x.Id == spareId);
-            return View(spare);
+            SparePart spare = _db.FindById(spareId);
+            return PartialView(spare);
         }
         
         [HttpPost]
-        public virtual ViewResult Edit(SparePart spare)
+        public virtual ActionResult Edit(SparePart sparePart)
         {
             if (ModelState.IsValid)
             {
-                spare.SavePart();
-                TempData["message"] = string.Format("Изменения в товаре \"{0}\" были сохранены", spare.MarkWithModel);
-                return View("Index", new SparePartListViewModel(pageSize));
+                _db.SavePart(sparePart);
+                TempData["message"] = string.Format("Изменения в товаре \"{0}\" были сохранены", sparePart.MarkWithModel);
+                return RedirectToAction("Index");
             }
-            return View(spare);
+            return View(sparePart);
         }
 
         public virtual ActionResult Delete(int spareId)
         {
-            SparePart deleted = db.SpareParts.First(x => x.Id == spareId);
+            SparePart deleted = _db.FindById(spareId);
             if (deleted != null)
             {
-                db.SpareParts.Remove(deleted);
-                db.SaveChanges();
-                TempData["message"] = string.Format("Товар \"{0}\" был удален",
-                    deleted.MarkWithModel);
+                _db.Remove(spareId);
+                TempData["message"] = string.Format("Товар \"{0}\" был удален", deleted.MarkWithModel);
             }
-            return View("Index", new SparePartListViewModel(null, 1, null, pageSize));
-        }
-
-        [HttpPost]
-        public virtual ViewResult Index(SparePartListViewModel listView)
-        {            
-            return View(new SparePartListViewModel(null, 1, listView.Search, pageSize));
+            return RedirectToAction("Index");
         }
 	}    
 }
