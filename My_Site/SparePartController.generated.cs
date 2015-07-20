@@ -28,9 +28,6 @@ namespace My_Site.Controllers
     public partial class SparePartController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public SparePartController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected SparePartController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -108,7 +105,7 @@ namespace My_Site.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_Show
         {
-            public readonly string spareid = "spareid";
+            public readonly string spareId = "spareId";
             public readonly string returnUrl = "returnUrl";
         }
         static readonly ViewsClass s_views = new ViewsClass();
@@ -121,8 +118,10 @@ namespace My_Site.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string List = "List";
                 public readonly string Show = "Show";
             }
+            public readonly string List = "~/Views/SparePart/List.cshtml";
             public readonly string Show = "~/Views/SparePart/Show.cshtml";
         }
     }
@@ -146,15 +145,15 @@ namespace My_Site.Controllers
         }
 
         [NonAction]
-        partial void ShowOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int spareid, string returnUrl);
+        partial void ShowOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int spareId, string returnUrl);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Show(int spareid, string returnUrl)
+        public override System.Web.Mvc.ActionResult Show(int spareId, string returnUrl)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Show);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "spareid", spareid);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "spareId", spareId);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "returnUrl", returnUrl);
-            ShowOverride(callInfo, spareid, returnUrl);
+            ShowOverride(callInfo, spareId, returnUrl);
             return callInfo;
         }
 

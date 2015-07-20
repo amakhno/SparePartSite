@@ -39,6 +39,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=3.4.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.3.4.0\lib\net40\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=3.3.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.3.3.4\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -206,11 +214,53 @@
     <Compile Include="Migrations\201507132147397_5.Designer.cs">
       <DependentUpon>201507132147397_5.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201507171126081_6.cs" />
+    <Compile Include="Migrations\201507171126081_6.Designer.cs">
+      <DependentUpon>201507171126081_6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507171135040_7.cs" />
+    <Compile Include="Migrations\201507171135040_7.Designer.cs">
+      <DependentUpon>201507171135040_7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507171206117_8.cs" />
+    <Compile Include="Migrations\201507171206117_8.Designer.cs">
+      <DependentUpon>201507171206117_8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507171244210_9.cs" />
+    <Compile Include="Migrations\201507171244210_9.Designer.cs">
+      <DependentUpon>201507171244210_9.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507171247066_10.cs" />
+    <Compile Include="Migrations\201507171247066_10.Designer.cs">
+      <DependentUpon>201507171247066_10.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507171248365_11.cs" />
+    <Compile Include="Migrations\201507171248365_11.Designer.cs">
+      <DependentUpon>201507171248365_11.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507171307111_12.cs" />
+    <Compile Include="Migrations\201507171307111_12.Designer.cs">
+      <DependentUpon>201507171307111_12.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507171330133_13.cs" />
+    <Compile Include="Migrations\201507171330133_13.Designer.cs">
+      <DependentUpon>201507171330133_13.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Adress.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\CartIndexViewModel.cs" />
+    <Compile Include="Models\DbContext.cs" />
+    <Compile Include="Models\Intefaces\IOrderRepository.cs" />
+    <Compile Include="Models\Intefaces\ISparePartRepository.cs" />
+    <Compile Include="Models\Layers\RepositoryLayer.cs" />
+    <Compile Include="Models\Order.cs" />
     <Compile Include="Models\PagingInfo.cs" />
+    <Compile Include="Models\Repository\BaseRepository.cs" />
+    <Compile Include="Models\Repository\OrderRepository.cs" />
+    <Compile Include="Models\Repository\SparePartRepository.cs" />
+    <Compile Include="Models\Singleton.cs" />
     <Compile Include="Models\SparePart.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\SparePartListViewModel.cs" />
@@ -268,6 +318,7 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Content\Images.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -322,7 +373,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Categories.cshtml" />
     <Content Include="Views\Shared\_LayoutWithoutCategories.cshtml" />
-    <Content Include="Views\Shared\List.cshtml" />
+    <Content Include="Views\SparePart\List.cshtml" />
     <Content Include="Views\Shared\_SparePartWithDesc.cshtml" />
     <Content Include="Views\Navigation\Menu.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
@@ -338,9 +389,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>T4MVC.cs</LastGenOutput>
     </None>
+    <Content Include="Views\Admin\Table.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -364,6 +417,30 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201507132147397_5.resx">
       <DependentUpon>201507132147397_5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507171126081_6.resx">
+      <DependentUpon>201507171126081_6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507171135040_7.resx">
+      <DependentUpon>201507171135040_7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507171206117_8.resx">
+      <DependentUpon>201507171206117_8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507171244210_9.resx">
+      <DependentUpon>201507171244210_9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507171247066_10.resx">
+      <DependentUpon>201507171247066_10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507171248365_11.resx">
+      <DependentUpon>201507171248365_11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507171307111_12.resx">
+      <DependentUpon>201507171307111_12.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507171330133_13.resx">
+      <DependentUpon>201507171330133_13.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

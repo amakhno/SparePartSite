@@ -4,23 +4,29 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using My_Site.Models;
+using My_Site.Models.Repository;
 
 namespace My_Site.Controllers
 {
     public partial class SparePartController : Controller
-    {
-        ApplicationDbContext db = new ApplicationDbContext();
+    {        
+        private ISparePartRepository _db;
         private int pageSize = 4;
+
+        public SparePartController(ISparePartRepository db)
+        {
+            _db = db;
+        }
 
         public virtual ActionResult List(string category = "Двигатель", int page = 1)
         {
-            SparePartListViewModel model = new SparePartListViewModel(category, page, null, pageSize);
+            SparePartListViewModel model = _db.Search(category, page, null, pageSize);
             return View(model);
         }
 
-        public virtual ActionResult Show(int spareid, string returnUrl)
+        public virtual ActionResult Show(int spareId, string returnUrl)
         {
-            SparePart sparepart = db.SpareParts.Where(x => x.Id == spareid).FirstOrDefault();
+            SparePart sparepart = _db.FindById(spareId);
             return View(sparepart);
         }
     }

@@ -199,3 +199,5 @@ FakesAssemblies/
 *.opt
 My_Site/Scripts/_references.js
 My_Site/My_Site.csproj
+*.png
+My_Site/My_Site.csproj

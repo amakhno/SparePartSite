@@ -8,6 +8,9 @@ using System.Web.Routing;
 using System.Data.Entity;
 using My_Site.Models;
 using My_Site.Infrastructure.Binders;
+using My_Site.Models.Layers;
+using Autofac;
+using Autofac.Integration.Mvc;
 
 namespace My_Site
 {
@@ -15,6 +18,22 @@ namespace My_Site
     {
         protected void Application_Start()
         {
+            var builder = new ContainerBuilder();
+
+            // регистрируем контроллер в текущей сборке
+            builder.RegisterControllers(typeof(MvcApplication).Assembly);
+
+            // регистрируем споставление типов
+            builder.RegisterModule(new RepositoryLayer());
+
+            // создаем новый контейнер с теми зависимостями, которые определены выше
+            var container = builder.Build();
+
+            // Setup DI as default MVC controller factory
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+
+
+
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

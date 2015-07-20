@@ -28,9 +28,6 @@ namespace My_Site.Controllers
     public partial class CartController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public CartController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected CartController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -166,7 +163,8 @@ namespace My_Site.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_Checkout
         {
-            public readonly string returnUrl = "returnUrl";
+            public readonly string cart = "cart";
+            public readonly string adress = "adress";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -247,14 +245,26 @@ namespace My_Site.Controllers
         }
 
         [NonAction]
-        partial void CheckoutOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string returnUrl);
+        partial void CheckoutOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, My_Site.Models.Cart cart);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Checkout(string returnUrl)
+        public override System.Web.Mvc.ActionResult Checkout(My_Site.Models.Cart cart)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Checkout);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "returnUrl", returnUrl);
-            CheckoutOverride(callInfo, returnUrl);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "cart", cart);
+            CheckoutOverride(callInfo, cart);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void CheckoutOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, My_Site.Models.Adress adress);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult Checkout(My_Site.Models.Adress adress)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Checkout);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "adress", adress);
+            CheckoutOverride(callInfo, adress);
             return callInfo;
         }
 
